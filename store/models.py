@@ -1,6 +1,7 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
+
 
 #ProductManager with required Properties
 #query set to all Products and filter out active products

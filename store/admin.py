@@ -1,5 +1,7 @@
 from django.contrib import admin
+
 from .models import Category, Product
+
 
 #Registered Category model in admin panel
 @admin.register(Category)
