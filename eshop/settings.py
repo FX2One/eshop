@@ -25,7 +25,7 @@ SECRET_KEY = 'osu_ix97-3_@ypdxbso%x!i#kv%72s$^jqgl2&xgj88zty&e1i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mydomain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['mydomain.com', 'localhost']
 
 # Application definition
 
@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'eshop.urls'
@@ -62,7 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'store.context_processors.categories',  #change for custom context_processor
+                'store.context_processors.categories',  # change for custom context_processor
             ],
         },
     },
