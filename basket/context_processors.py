@@ -1,4 +1,4 @@
 from .basket import Basket
 
 def basket(request):
-    return 
+    return {'basket': Basket(request)}
