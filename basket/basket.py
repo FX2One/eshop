@@ -7,5 +7,11 @@ class Basket():
         basket = self.session.get('basket_key')
         #if entry doesn't not exist, create entry with empty basket
         if 'basket_key' not in request.session:
-            basket = self.session['basket_key'] = {'number': 123123412345}
+            basket = self.session['basket_key'] = {}
         self.basket = basket
+
+    def add(self, product):
+        '''add and update users basket session data'''
+        product_id = product.id
+        if product_id not in self.basket:
+            self.basket[product_id] = {'price': product.price}
