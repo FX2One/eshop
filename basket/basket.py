@@ -14,4 +14,9 @@ class Basket():
         '''add and update users basket session data'''
         product_id = product.id
         if product_id not in self.basket:
-            self.basket[product_id] = {'price': product.price}
+            self.basket[product_id] = {'price': float(product.price)}
+
+        '''
+        saving this basket by .modified 
+        '''
+        self.session.modified = True
