@@ -60,7 +60,7 @@
                 action: 'post',
             },
             success: function(json) {
-            
+                document.getElementById("basket_qty").innerHTML = json.qty
             },
             error: function(xhr, errmsg, err) {}
         });

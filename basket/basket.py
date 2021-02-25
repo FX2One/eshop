@@ -20,3 +20,11 @@ class Basket():
         saving this basket by .modified 
         '''
         self.session.modified = True
+
+    def __len__(self):
+        '''
+        Get the basket data and count the quantity(qty) of items
+        ''''''
+        iterate through the basket looking for item quantity ,when item quantity exists in the basket we add it up (sum) 
+        '''
+        return sum(item['qty'] for item in self.basket.values())
