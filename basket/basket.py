@@ -1,3 +1,5 @@
+from store.models import Product
+from decimal import Decimal
 
 '''basket class with default behaviour ,CRUD'''
 class Basket():
@@ -20,6 +22,13 @@ class Basket():
         saving this basket by .modified 
         '''
         self.session.modified = True
+
+    def __iter__(self):
+        '''iterate through keys in the basket'''
+        product_ids = self.basket.keys()
+        '''only get products flagged as active'''
+        products = Product.products.filter(id__in=product_ids)
+        basket = self.basket.copy()
 
     def __len__(self):
         '''
