@@ -30,6 +30,9 @@ class Basket():
         products = Product.products.filter(id__in=product_ids)
         basket = self.basket.copy()
 
+        for product in products:
+            basket[str(product.id)]['product'] = product
+
     def __len__(self):
         '''
         Get the basket data and count the quantity(qty) of items
