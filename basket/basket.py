@@ -2,12 +2,14 @@ from store.models import Product
 from decimal import Decimal
 
 '''basket class with default behaviour ,CRUD'''
+
+
 class Basket():
     def __init__(self, request):
         self.session = request.session
-        #creating session for first entry
+        # creating session for first entry
         basket = self.session.get('basket_key')
-        #if entry doesn't not exist, create entry with empty basket
+        # if entry doesn't not exist, create entry with empty basket
         if 'basket_key' not in request.session:
             basket = self.session['basket_key'] = {}
         self.basket = basket
@@ -16,7 +18,7 @@ class Basket():
         '''add and update users basket session data'''
         product_id = product.id
         if product_id not in self.basket:
-            self.basket[product_id] = {'price': int(product.price), 'qty':int(qty)}
+            self.basket[product_id] = {'price': int(product.price), 'qty': int(qty)}
 
         '''
         saving this basket by .modified 
@@ -45,3 +47,6 @@ class Basket():
         iterate through the basket looking for item quantity ,when item quantity exists in the basket we add it up (sum) 
         '''
         return sum(item['qty'] for item in self.basket.values())
+
+    def get_total_price(self):
+        return sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
