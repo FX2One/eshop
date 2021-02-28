@@ -5,17 +5,28 @@ from django.http import JsonResponse
 from store.models import Product
 from .basket import Basket
 
+
 def basket_summary(request):
     basket = Basket(request)
-    return render(request, 'store/basket/summary.html', {'basket':basket})
+    return render(request, 'store/basket/summary.html', {'basket': basket})
+
 
 def basket_add(request):
     basket = Basket(request)
     if request.POST.get('action') == 'post':
-        product_id = int(request.POST.get('productid')) #collect product_id from data
-        product_qty = int(request.POST.get('productqty')) #collect product qty from data
+        product_id = int(request.POST.get('productid'))  # collect product_id from data
+        product_qty = int(request.POST.get('productqty'))  # collect product qty from data
         product = get_object_or_404(Product, id=product_id)
         basket.add(product=product, qty=product_qty)
         basketqty = basket.__len__()
-        response = JsonResponse({'qty':basketqty}) #return quantity we added
+        response = JsonResponse({'qty': basketqty})  # return quantity we added
+        return response
+
+
+def basket_delete(request):
+    basket = Basket(request)
+    if request.POST.get('action') == 'post':
+        product_id = str(request.POST.get('productid'))
+        basket.delete(product=product_id)
+        response = JsonResponse({'Success': True})
         return response
