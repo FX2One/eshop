@@ -33,6 +33,11 @@ class Basket():
         for product in products:
             basket[str(product.id)]['product'] = product
 
+        for item in basket.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['qty']
+            yield item
+
     def __len__(self):
         '''
         Get the basket data and count the quantity(qty) of items
