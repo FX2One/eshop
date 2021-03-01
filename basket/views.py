@@ -28,5 +28,5 @@ def basket_delete(request):
     if request.POST.get('action') == 'post':
         product_id = str(request.POST.get('productid'))
         basket.delete(product=product_id)
-        response = JsonResponse({'Success': True})
+        response = JsonResponse({'success': True})
         return response

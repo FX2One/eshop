@@ -59,6 +59,7 @@ class Basket():
 
         if product_id in self.basket:
             del self.basket[product_id]
+            print(product_id)
             self.save()
 
     def save(self):
