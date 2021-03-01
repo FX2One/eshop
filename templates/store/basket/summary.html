@@ -62,6 +62,7 @@
 <script>
     $(document).on('click', '.delete-button', function (e) {
         e.preventDefault();
+        var prod_id = $(this).data('index');
         $.ajax({
             type: 'POST',
             url: '{% url "basket:basket_delete" %}',
@@ -71,6 +72,8 @@
                 action: 'post',
             },
             success: function(json) {
+                console.log(prod_id)
+                $('.product-item[data-index="'+ prod_id +'"]').remove();
             },
             error: function(xhr, errmsg, err) {}
         });
