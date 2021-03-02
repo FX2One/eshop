@@ -61,45 +61,42 @@
   </div>
 </main>
 <script>
-    //Delete Item
-    $(document).on('click', '.delete-button', function (e) {
-        e.preventDefault();
-        var prod_id = $(this).data('index');
-        $.ajax({
-            type: 'POST',
-            url: '{% url "basket:basket_delete" %}',
-            data: {
-                productid: $(this).data('index'),
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                action: 'post',
-            },
-            success: function(json) {
-                console.log(prod_id)
-                $('.product-item[data-index="'+ prod_id +'"]').remove();
-            },
-            error: function(xhr, errmsg, err) {}
-        });
+  // Delete Item
+  $(document).on('click', '.delete-button', function (e) {
+    e.preventDefault();
+    var prod_id = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_delete" %}',
+      data: {
+        productid: $(this).data('index'),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+        $('.product-item[data-index="' + prod_id + '"]').remove();
+      },
+      error: function (xhr, errmsg, err) {}
     });
+  })
 
-    //Update Item
-    $(document).on('click', '.update-button', function (e) {
-        e.preventDefault();
-        var prod_id = $(this).data('index');
-        $.ajax({
-            type: 'POST',
-            url: '{% url "basket:basket_update" %}',
-            data: {
-                productid: $(this).data('index'),
-                productqty: $('#select' + prod_id +' option:selected').text()
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                action: 'post',
-            },
-            success: function(json) {
-                console.log(prod_id)
-                $('.product-item[data-index="'+ prod_id +'"]').remove();
-            },
-            error: function(xhr, errmsg, err) {}
-        });
+  // Update Item
+  $(document).on('click', '.update-button', function (e) {
+    e.preventDefault();
+    var prod_id = $(this).data('index');
+    $.ajax({
+      type: 'POST',
+      url: '{% url "basket:basket_update" %}',
+      data: {
+        productid: $(this).data('index'),
+        productqty: $('#select' + prod_id + ' option:selected').text(),
+        csrfmiddlewaretoken: "{{csrf_token}}",
+        action: 'post'
+      },
+      success: function (json) {
+      },
+      error: function (xhr, errmsg, err) {}
     });
+  })
 </script>
 {% endblock %}
