@@ -62,5 +62,15 @@ class Basket():
             print(product_id)
             self.save()
 
+    def update(self, product, qty):
+        '''
+        Update values
+        '''
+        product_id = product
+        qty = qty
+
+        if product_id not in self.basket:
+            
+
     def save(self):
         self.session.modified = True

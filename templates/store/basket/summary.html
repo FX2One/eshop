@@ -29,6 +29,7 @@
             <div class="row p-3">
               <div class="col-12">
                 <label for="select">Qty</label>
+                <!-- unique ID for select field to select individual items-->
                 <select id="select{{product.id}}">
                   <option selected>
                     {{item.qty}}
@@ -38,7 +39,7 @@
                   <option value="">3</option>
                   <option value="">4</option>
                 </select>
-                <button type="button" id="add-button" value="{{product.id}}"
+                <button type="button" id="update-button" data-index="{{product.id}}"
                   class="btn btn-outline-secondary btn-sm update-button">
                   Update
                 </button>
@@ -60,6 +61,7 @@
   </div>
 </main>
 <script>
+    //Delete Item
     $(document).on('click', '.delete-button', function (e) {
         e.preventDefault();
         var prod_id = $(this).data('index');
@@ -68,6 +70,27 @@
             url: '{% url "basket:basket_delete" %}',
             data: {
                 productid: $(this).data('index'),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post',
+            },
+            success: function(json) {
+                console.log(prod_id)
+                $('.product-item[data-index="'+ prod_id +'"]').remove();
+            },
+            error: function(xhr, errmsg, err) {}
+        });
+    });
+
+    //Update Item
+    $(document).on('click', '.update-button', function (e) {
+        e.preventDefault();
+        var prod_id = $(this).data('index');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_update" %}',
+            data: {
+                productid: $(this).data('index'),
+                productqty: $('#select' + prod_id +' option:selected').text()
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: 'post',
             },
