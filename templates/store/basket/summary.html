@@ -21,14 +21,14 @@
         <div class="border">
           <div class="col border-bottom">
             <div class="row p-3">
-              <div class="col-6">Total Price: </div>
-              <div class="col-6 text-end"><span class="h6 fw-bold">Є{{ item.total_price }}</span></div>
+              <div class="col-6">Product Price: </div>
+              <div class="col-6 text-end"><span class="h6 fw-bold">Є{{ product.price }}</span></div>
             </div>
           </div>
           <div class="col">
             <div class="row p-3">
               <div class="col-12">
-                <label for="select">Qty</label>
+                <label for="select">Quantity</label>
                 <!-- unique ID for select field to select individual items-->
                 <select id="select{{product.id}}">
                   <option selected>
@@ -56,7 +56,7 @@
     {% endwith %}
     {% endfor %}
     <div class="col-12 text-end">
-      <div class="h6 fw-bold">Total: Є<div id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</div></div>
+      <div class="h6 fw-bold">Sub Total: Є<div id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</div></div>
     </div>
   </div>
 </main>
@@ -75,6 +75,8 @@
       },
       success: function (json) {
         $('.product-item[data-index="' + prod_id + '"]').remove();
+        document.getElementById("subtotal").innerHTML = json.subtotal
+        document.getElementById("basket-qty").innerHTML = json.qty
       },
       error: function (xhr, errmsg, err) {}
     });
